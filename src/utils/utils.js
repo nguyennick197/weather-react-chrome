@@ -1,9 +1,9 @@
 import { getOneCallData, reverseGeolocateClient } from "./requests";
 
 export function isSyncDataValid(data) {
-  if (!data || !data?.weatherData) return false;
+  if (!data || !data?.weatherData?.timestamp) return false;
   const currentDate = new Date();
-  if (currentDate.getTime() - 10000 < data.timestamp) return false;
+  if (currentDate.getTime() - 600000 > data.weatherData.timestamp) return false;
   return true;
 }
 
@@ -43,4 +43,15 @@ export async function getAndFormatData(position) {
     };
     return newWeatherData;
   }
+}
+
+export function getFromLocalStorage(key) {
+  if (typeof window === "undefined") return;
+  const item = window.localStorage.getItem(key);
+  return item && JSON.parse(item);
+}
+
+export function setLocalStorage(key, value) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(key, JSON.stringify(value));
 }

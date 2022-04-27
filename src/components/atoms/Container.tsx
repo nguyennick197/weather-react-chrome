@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div<{
+interface ContainerProps {
   justifyContent?: string;
   alignItems?: string;
   width?: string | number;
@@ -8,12 +8,14 @@ export const Container = styled.div<{
   padding?: number;
   borderRadius?: number;
   backgroundColor?: string;
-}>`
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: ${(props) => (props.row ? "row" : "column")};
+  align-items: ${(props) => props.alignItems && props.alignItems};
   ${(props) =>
     props.justifyContent && `justify-content: ${props.justifyContent}};`}
-  ${(props) => props.alignItems && `align-items: ${props.alignItems};`}
   ${(props) => props.width && `width: ${props.width};`}
   ${(props) => props.padding && `padding: ${props.padding}px;`}
   ${(props) => props.borderRadius && `border-radius: ${props.borderRadius}px;`}

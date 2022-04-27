@@ -5,7 +5,8 @@ export const AppContainer = styled.div`
   min-height: 100vh;
   width: 100%;
   padding: 10px;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
 `;

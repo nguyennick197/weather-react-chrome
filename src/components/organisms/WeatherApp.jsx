@@ -43,7 +43,7 @@ export function WeatherApp() {
           storeAndSetData(position);
         }
       });
-    } else {
+    } else if (!weatherData) {
       storeAndSetData(position);
     }
   }, [position?.lat, position?.lon]);

@@ -36,11 +36,11 @@ export function WeatherApp() {
         if (isSyncDataValid(data)) {
           setWeatherData(data.weatherData);
         } else {
-          storeAndSetData(data);
+          storeAndSetData(position);
         }
       });
     } else {
-      storeAndSetData(data);
+      storeAndSetData(position);
     }
   }, [position?.lat, position?.lon]);
 

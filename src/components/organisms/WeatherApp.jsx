@@ -1,67 +1,46 @@
+/*global chrome*/
 import { useState, useEffect } from "react";
-import { getWeatherData } from "../../utils/requests";
-import cityList from "../../utils/city_list.json";
-import { SearchInput } from "../molecules/SearchInput";
+import { getAndFormatData } from "../../utils/utils";
 import { AppContainer } from "../atoms/AppContainer";
 import { useGeolocation } from "../../utils/hooks";
 import { WeatherCard } from "../molecules/WeatherCard";
 import { Spacer } from "../atoms/Spacer";
 import { AppHeader } from "../molecules/AppHeader";
 import { Container } from "../atoms/Container";
+import { isSyncDataValid } from "../../utils/utils";
 
 export function WeatherApp() {
   const [weatherData, setWeatherData] = useState();
-  const [cityOptions, setCityOptions] = useState();
-
   const position = useGeolocation();
 
-  async function getAndFormatWeather(settings) {
-    const data = await getWeatherData(settings);
-    console.log(data);
-    if (data) {
-      const { name, weather, main } = data;
-      const { feels_like, humidity, temp, temp_max, temp_min } = main;
-      const group = weather[0].main;
-      const description = weather[0].description;
-      const newWeatherData = {
-        name,
-        feels_like,
-        humidity,
-        temp,
-        temp_max,
-        temp_min,
-        group,
-        description,
-      };
-      setWeatherData(newWeatherData);
+  async function storeAndSetData(position) {
+    const data = await getAndFormatData(position);
+    if (chrome && chrome.storage) {
+      chrome.storage.sync.set(
+        {
+          weatherData: {
+            ...data,
+            timestamp: new Date().getTime(),
+          },
+        },
+        () => console.log("Saved weather data")
+      );
     }
+    setWeatherData(data);
   }
-
-  // useEffect(() => {
-  //   const options = cityList.map(c => {
-  //     let label = c.name
-  //     if (c.state) label += `, ${c.state}`
-  //     label += `, ${c.country}`
-  //     const id = c.id
-  //     const value = c.coord
-  //     return {
-  //       id,
-  //       label,
-  //       value
-  //     }
-  //   })
-  //   setCityOptions(options)
-  // }, []);
 
   useEffect(() => {
     console.log("position", position);
-    if (position) {
-      const settings = {
-        lat: position.lat,
-        lon: position.lon,
-        units: "imperial",
-      };
-      getAndFormatWeather(settings);
+    if (chrome && chrome.storage) {
+      chrome.storage.sync.get(["weatherData"], (data) => {
+        if (isSyncDataValid(data)) {
+          setWeatherData(data.weatherData);
+        } else {
+          storeAndSetData(data);
+        }
+      });
+    } else {
+      storeAndSetData(data);
     }
   }, [position?.lat, position?.lon]);
 

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import SearchIcon from "../../icons/search_icon.png";
+//import cityList from "../../utils/city_list.json";
 
 const InputWrapper = styled.div`
     display: flex;
@@ -25,6 +26,22 @@ const InputWrapper = styled.div`
 `;
 
 export function SearchInput(props: React.HTMLProps<HTMLInputElement>) {
+  // useEffect(() => {
+  //   const options = cityList.map(c => {
+  //     let label = c.name
+  //     if (c.state) label += `, ${c.state}`
+  //     label += `, ${c.country}`
+  //     const id = c.id
+  //     const value = c.coord
+  //     return {
+  //       id,
+  //       label,
+  //       value
+  //     }
+  //   })
+  //   setCityOptions(options)
+  // }, []);
+
   return (
     <InputWrapper>
       <img src={SearchIcon} height={24} width={24} alt="Search" />

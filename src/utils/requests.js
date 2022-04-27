@@ -21,3 +21,14 @@ export async function getOneCallData(settings) {
     throw data;
   }
 }
+
+export async function reverseGeolocateClient(lat, lon) {
+  let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (res.ok) {
+    return data;
+  } else {
+    throw data;
+  }
+}

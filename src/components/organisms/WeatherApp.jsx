@@ -6,6 +6,8 @@ import { AppContainer } from "../atoms/AppContainer";
 import { useGeolocation } from "../../utils/hooks";
 import { WeatherCard } from "../molecules/WeatherCard";
 import { Spacer } from "../atoms/Spacer";
+import { AppHeader } from "../molecules/AppHeader";
+import { Container } from "../atoms/Container";
 
 export function WeatherApp() {
   const [weatherData, setWeatherData] = useState();
@@ -65,9 +67,11 @@ export function WeatherApp() {
 
   return (
     <AppContainer>
-      <SearchInput />
-      <Spacer size={24} />
-      {weatherData && <WeatherCard {...weatherData} />}
+      <AppHeader />
+      <Spacer size={18} />
+      <Container padding={10}>
+        {weatherData && <WeatherCard {...weatherData} />}
+      </Container>
     </AppContainer>
   );
 }

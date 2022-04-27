@@ -1,19 +1,14 @@
 import { P } from "../atoms/Text";
 import styled from "@emotion/styled";
 import { Spacer } from "../atoms/Spacer";
+import { Container } from "../atoms/Container";
 
 const WeatherContainer = styled.div`
   justify-content: center;
-  background-color: #9370db;
+  background-image: linear-gradient(to bottom right, #0084c8, #9370db);
   border-radius: 12px;
   padding: 12px;
   width: 240px;
-`;
-
-const CenteredRow = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
 `;
 
 interface WeatherData {
@@ -42,11 +37,11 @@ export function WeatherCard({
       <Spacer />
       <P size={20}> {group} </P>
       <Spacer size={4} />
-      <CenteredRow>
+      <Container row justifyContent="center" width="100%">
         <P size={20}> H:{Math.round(temp_max)}&deg; </P>
         <Spacer size={12} />
         <P size={20}> L:{Math.round(temp_min)}&deg; </P>
-      </CenteredRow>
+      </Container>
     </WeatherContainer>
   );
 }

@@ -1,9 +1,11 @@
 import { getOneCallData, reverseGeolocateClient } from "./requests";
 
 export function isSyncDataValid(data) {
-  if (!data || !data?.weatherData?.timestamp) return false;
+  if (!data) return false;
+  const timestamp = data.weatherData?.timestamp || data.timestamp;
+  if (!timestamp) return false;
   const currentDate = new Date();
-  if (currentDate.getTime() - 600000 > data.weatherData.timestamp) return false;
+  if (currentDate.getTime() - 600000 > timestamp) return false;
   return true;
 }
 
@@ -40,6 +42,8 @@ export async function getAndFormatData(position) {
       temp_min,
       group,
       description,
+      daily,
+      hourly,
     };
     return newWeatherData;
   }

@@ -10,7 +10,7 @@ export function AppHeader() {
       <Container row alignItems="center" padding={8}>
         <img src={Logo} height={30} width={30} alt="Logo" />
         <Spacer />
-        <P size={20}> Luna Weather </P>
+        <P size={20}> Luna Weather Assistant </P>
       </Container>
       <HR />
     </Container>

@@ -3,8 +3,6 @@ import { P } from "../atoms/Text";
 import styled from "@emotion/styled";
 import { Container } from "../atoms/Container";
 import { Spacer } from "../atoms/Spacer";
-import { format } from "date-fns";
-import { getIcon, isNight } from "../../utils/utils";
 import { HourWeatherComponent } from "../molecules/HourWeatherComponent";
 
 const WeatherContainer = styled.div`
@@ -19,8 +17,9 @@ const WeatherContainer = styled.div`
 
 export function HourlyForecast({ data, sunrise, sunset, nextSunrise }) {
   const dataArr = useMemo(() => {
+    const sunriseDt = data[0].dt > sunrise ? nextSunrise : sunrise;
     const sunriseObject = {
-      dt: data[0].dt > sunrise ? nextSunrise : sunrise,
+      dt: sunriseDt,
       type: "Sunrise",
     };
     const sunsetObject = {
@@ -28,12 +27,12 @@ export function HourlyForecast({ data, sunrise, sunset, nextSunrise }) {
       type: "Sunset",
     };
     const slicedData = [...data.slice(0, 24)];
-    const sunriseIndex = slicedData.findIndex((point) => point.dt > sunrise);
     const sunsetIndex = slicedData.findIndex((point) => point.dt > sunset);
-    slicedData.splice(sunriseIndex + 1, 0, sunriseObject);
-    slicedData.splice(sunsetIndex + 1, 0, sunsetObject);
+    const sunriseIndex = slicedData.findIndex((point) => point.dt > sunriseDt);
+    slicedData.splice(sunriseIndex, 0, sunriseObject);
+    slicedData.splice(sunsetIndex, 0, sunsetObject);
     return slicedData;
-  }, [data]);
+  }, [data, sunrise, sunset, nextSunrise]);
 
   return (
     <WeatherContainer>
@@ -43,7 +42,7 @@ export function HourlyForecast({ data, sunrise, sunset, nextSunrise }) {
       </P>
       <Spacer />
       <Container row>
-        {data.slice(0, 24).map((point) => {
+        {dataArr.map((point) => {
           return (
             <HourWeatherComponent
               point={point}

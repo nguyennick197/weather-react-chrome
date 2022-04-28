@@ -11,7 +11,7 @@ export function HourWeatherComponent({ point, sunrise, sunset, nextSunrise }) {
   const showMoon = isNight(point.dt, sunrise, sunset, nextSunrise);
   const pointId = type || point.weather[0].id;
   const icon = getIcon(pointId, point.wind_speed, showMoon);
-  const temp = type || Math.round(point.temp);
+  const label = type || Math.round(point.temp);
   return (
     <Container justifyContent="center" alignItems="center" key={point.dt} row>
       <Container alignItems="center" justifyContent="center">
@@ -19,10 +19,14 @@ export function HourWeatherComponent({ point, sunrise, sunset, nextSunrise }) {
         <Spacer size={6} />
         <img src={icon} alt="Weather Icon" height={28} width={28} />
         <Spacer size={6} />
-        <P size={20} style={{ paddingLeft: 5 }}>
-          {" "}
-          {temp}&deg;{" "}
-        </P>
+        {type ? (
+          <P size={20}>{type}</P>
+        ) : (
+          <P size={20} style={{ paddingLeft: 5 }}>
+            {" "}
+            {label}&deg;{" "}
+          </P>
+        )}
       </Container>
       <Spacer size={24} />
     </Container>

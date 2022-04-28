@@ -28,7 +28,7 @@ export function WeatherApp() {
               data={weatherData.hourly}
               sunrise={weatherData.sunrise}
               sunset={weatherData.sunset}
-              nextSunrise={weatherData.daily[2].sunrise}
+              nextSunrise={weatherData.daily[1].sunrise}
             />
           </Container>
         ) : (

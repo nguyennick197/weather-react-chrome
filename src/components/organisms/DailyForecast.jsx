@@ -4,12 +4,13 @@ import { Container } from "../atoms/Container";
 import { Spacer } from "../atoms/Spacer";
 import { format } from "date-fns";
 import { getIcon } from "../../utils/utils";
+import { HR } from "../atoms/HR";
 
 const WeatherContainer = styled.div`
   justify-content: center;
   background-image: linear-gradient(to bottom right, #0084c8, #9370db);
   border-radius: 12px;
-  padding: 12px;
+  padding: 8px 12px;
   width: 200px;
   max-height: 180px;
   overflow-y: scroll;
@@ -22,18 +23,18 @@ export function DailyForecast({ data }) {
         {" "}
         Daily Forecast{" "}
       </P>
-      <Spacer />
       {data.slice(0, 24).map((point) => {
         const time = format(new Date(point.dt * 1000), "E");
         const icon = getIcon(point.weather[0].id, point.wind_speed);
         return (
           <Container key={point.dt}>
+            <HR color="white" opacity={0.3} />
             <Container row alignItems="center">
-              <Container style={{ width: 40 }}>
+              <Container width={40}>
                 <P size={20}> {time} </P>
               </Container>
               <Spacer />
-              <Container style={{ width: 40 }}>
+              <Container width={40}>
                 <img
                   src={icon}
                   alt={point.weather[0].main}
@@ -42,7 +43,7 @@ export function DailyForecast({ data }) {
                 />
               </Container>
               <Spacer />
-              <Container style={{ width: 100 }}>
+              <Container width={100}>
                 <P size={20}>
                   {" "}
                   {Math.round(point.temp.min)}&deg;...{" "}
@@ -50,10 +51,10 @@ export function DailyForecast({ data }) {
                 </P>
               </Container>
             </Container>
-            <Spacer size={12} />
           </Container>
         );
       })}
+      <HR color="white" opacity={0.3} />
     </WeatherContainer>
   );
 }

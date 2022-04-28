@@ -1,13 +1,13 @@
 import { AppContainer } from "../atoms/AppContainer";
-import { WeatherCard } from "../molecules/WeatherCard";
+import { WeatherCard } from "./WeatherCard";
 import { Spacer } from "../atoms/Spacer";
 import { AppHeader } from "../molecules/AppHeader";
 import { Container } from "../atoms/Container";
 import { SpinningLoader } from "../atoms/SpinningLoader";
 import { P } from "../atoms/Text";
 import { useWeatherData } from "../hooks/useWeatherData";
-import { DailyForecast } from "../molecules/DailyForecast";
-import { HourlyForecast } from "../molecules/HourlyForecast";
+import { DailyForecast } from "./DailyForecast";
+import { HourlyForecast } from "./HourlyForecast";
 
 export function WeatherApp() {
   const weatherData = useWeatherData();
@@ -24,7 +24,12 @@ export function WeatherApp() {
               <DailyForecast data={weatherData.daily} />
             </Container>
             <Spacer size={16} />
-            <HourlyForecast data={weatherData.hourly} />
+            <HourlyForecast
+              data={weatherData.hourly}
+              sunrise={weatherData.sunrise}
+              sunset={weatherData.sunset}
+              nextSunrise={weatherData.daily[2].sunrise}
+            />
           </Container>
         ) : (
           <Container padding={20} justifyContent="center" alignItems="center">

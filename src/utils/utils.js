@@ -2,11 +2,15 @@ import { getOneCallData, reverseGeolocateClient } from "./requests";
 import Atmosphere from "../icons/atmosphere.png";
 import Clouds from "../icons/clouds.png";
 import Sun from "../icons/sun.png";
+import Moon from "../icons/moon.png";
+import CloudyMoon from "../icons/cloudymoon.png";
 import Rain from "../icons/rain.png";
 import Storm from "../icons/storm.png";
 import Snow from "../icons/winter.png";
 import FewClouds from "../icons/suncloud.png";
 import Wind from "../icons/wind.png";
+import Sunrise from "../icons/sunrise.png";
+import Sunset from "../icons/sunset.png";
 
 export function isSyncDataValid(data) {
   if (!data) return false;
@@ -82,14 +86,23 @@ export function setLocalStorage(key, value) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function getIcon(id, wind_speed = 0) {
+export function isNight(dt, sunrise, sunset, nextSunrise) {
+  if (dt < sunrise || (dt > sunset && dt < nextSunrise)) return true;
+  return false;
+}
+
+export function getIcon(id, wind_speed = 0, showMoon = false) {
+  if (id === "Sunrise") return Sunrise;
+  if (id === "Sunset") return Sunset;
   const group = String(id)[0];
   if (group === "2") return Storm;
   else if (group === "3" || group === "5") return Rain;
   else if (group === "6") return Snow;
   else if (group === "7") return Atmosphere;
   else if (wind_speed > 22) return Wind;
+  else if (id === 800 && showMoon) return Moon;
   else if (id === 800) return Sun;
+  else if (id === 801 && showMoon) return CloudyMoon;
   else if (id === 801) return FewClouds;
   else return Clouds;
 }

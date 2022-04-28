@@ -17,8 +17,8 @@ export const Container = styled.div<ContainerProps>`
   align-items: ${(props) => props.alignItems && props.alignItems};
   flex: ${(props) => props.flex && props.flex};
   ${(props) =>
-    props.justifyContent && `justify-content: ${props.justifyContent}};`}
-  ${(props) => props.width && `width: ${props.width};`}
+    props.justifyContent && `justify-content: ${props.justifyContent};`}
+  ${(props) => props.width && `width: ${props.width}px;`}
   ${(props) => props.padding && `padding: ${props.padding}px;`}
   ${(props) => props.borderRadius && `border-radius: ${props.borderRadius}px;`}
   ${(props) =>

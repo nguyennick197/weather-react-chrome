@@ -31,7 +31,7 @@ export async function getAndFormatData(position) {
   const weatherRequest = getOneCallData(settings);
   const geolocateRequest = reverseGeolocateClient(settings.lat, settings.lon);
   const data = await Promise.all([weatherRequest, geolocateRequest]);
-  console.log(data);
+  console.log("Request data", data);
   const weatherData = data[0];
   const locationData = data[1];
   if (weatherData) {

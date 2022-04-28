@@ -1,7 +1,6 @@
 import { AppContainer } from "../atoms/AppContainer";
 import { WeatherCard } from "./WeatherCard";
 import { Spacer } from "../atoms/Spacer";
-import { AppHeader } from "../molecules/AppHeader";
 import { Container } from "../atoms/Container";
 import { SpinningLoader } from "../atoms/SpinningLoader";
 import { P } from "../atoms/Text";
@@ -14,7 +13,6 @@ export function WeatherApp() {
 
   return (
     <AppContainer>
-      {/* <AppHeader /> */}
       <Container padding={10} justifyContent="center" alignItems="center">
         {weatherData ? (
           <Container>

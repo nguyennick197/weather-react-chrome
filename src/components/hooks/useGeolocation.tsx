@@ -10,10 +10,12 @@ export function useGeolocation() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      setUserCoords({
-        lat: position.coords.latitude,
-        lon: position.coords.longitude,
-      });
+      if (!userCoords) {
+        setUserCoords({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+      }
     });
   }, []);
 

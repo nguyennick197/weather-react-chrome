@@ -8,7 +8,7 @@ const WeatherContainer = styled.div`
   background-image: linear-gradient(to bottom right, #0084c8, #9370db);
   border-radius: 12px;
   padding: 12px;
-  width: 240px;
+  width: 300px;
 `;
 
 interface WeatherData {
@@ -33,7 +33,7 @@ export function WeatherCard({
     <WeatherContainer>
       <P size={24}> {name} </P>
       <Spacer size={4} />
-      <P size={48}> {Math.round(temp)}&deg; </P>
+      <P size={64}> {Math.round(temp)}&deg; </P>
       <Spacer />
       <P size={20}> {group} </P>
       <Spacer size={4} />

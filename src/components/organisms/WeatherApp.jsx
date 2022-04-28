@@ -1,4 +1,3 @@
-/*global chrome*/
 import { AppContainer } from "../atoms/AppContainer";
 import { WeatherCard } from "../molecules/WeatherCard";
 import { Spacer } from "../atoms/Spacer";
@@ -7,17 +6,27 @@ import { Container } from "../atoms/Container";
 import { SpinningLoader } from "../atoms/SpinningLoader";
 import { P } from "../atoms/Text";
 import { useWeatherData } from "../hooks/useWeatherData";
+import { DailyForecast } from "../molecules/DailyForecast";
+import { HourlyForecast } from "../molecules/HourlyForecast";
 
 export function WeatherApp() {
   const weatherData = useWeatherData();
 
   return (
     <AppContainer>
-      <AppHeader />
-      <Spacer size={18} />
+      {/* <AppHeader /> */}
+      <Spacer size={12} />
       <Container padding={10}>
         {weatherData ? (
-          <WeatherCard {...weatherData} />
+          <Container>
+            <Container row>
+              <WeatherCard {...weatherData} />
+              <Spacer size={16} />
+              <DailyForecast data={weatherData.daily} />
+            </Container>
+            <Spacer size={16} />
+            <HourlyForecast data={weatherData.hourly} />
+          </Container>
         ) : (
           <Container padding={20} justifyContent="center" alignItems="center">
             <SpinningLoader />

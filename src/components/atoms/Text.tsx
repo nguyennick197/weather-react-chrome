@@ -5,6 +5,7 @@ interface TextProps {
   color?: string;
   weight?: string | number;
   textAlign?: string;
+  padding?: number;
 }
 
 export const P = styled.p<TextProps>`
@@ -13,5 +14,5 @@ export const P = styled.p<TextProps>`
   color: ${(props) => props.color || "white"};
   text-align: ${(props) => props.textAlign || ""};
   margin: 0;
-  padding 0;
+  padding: ${(props) => props.padding || 0}px;
 `;

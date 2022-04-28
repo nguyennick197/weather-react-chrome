@@ -8,12 +8,14 @@ interface ContainerProps {
   padding?: number;
   borderRadius?: number;
   backgroundColor?: string;
+  flex?: number;
 }
 
 export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: ${(props) => (props.row ? "row" : "column")};
   align-items: ${(props) => props.alignItems && props.alignItems};
+  flex: ${(props) => props.flex && props.flex};
   ${(props) =>
     props.justifyContent && `justify-content: ${props.justifyContent}};`}
   ${(props) => props.width && `width: ${props.width};`}

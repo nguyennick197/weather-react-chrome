@@ -15,8 +15,7 @@ export function WeatherApp() {
   return (
     <AppContainer>
       {/* <AppHeader /> */}
-      <Spacer size={12} />
-      <Container padding={10}>
+      <Container padding={10} justifyContent="center" alignItems="center">
         {weatherData ? (
           <Container>
             <Container row>

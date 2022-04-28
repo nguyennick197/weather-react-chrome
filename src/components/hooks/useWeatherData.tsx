@@ -20,7 +20,7 @@ export function useWeatherData() {
       timestamp: new Date().getTime(),
     };
     if (chrome && chrome.storage) {
-      chrome.storage.sync.set(
+      chrome.storage.local.set(
         {
           weatherData: newData,
         },
@@ -35,7 +35,7 @@ export function useWeatherData() {
   useEffect(() => {
     console.log("position", position);
     if (chrome && chrome.storage && !weatherData) {
-      chrome.storage.sync.get(["weatherData"], (data) => {
+      chrome.storage.local.get(["weatherData"], (data) => {
         console.log("Synced data", data);
         if (isSyncDataValid(data)) {
           setWeatherData(data.weatherData);

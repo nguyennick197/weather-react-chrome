@@ -8,6 +8,7 @@ Google chrome extension that allows the user to easily access weather informatio
 - [TypeScript](https://www.typescriptlang.org/)
 - [OpenWeather API](https://openweathermap.org/api)
 - [Emotion](https://emotion.sh/docs/styled)
+- Icons from [flaticon](https://www.flaticon.com/) and [icons8](https://icons8.com/)
 
 ## Running locally
 

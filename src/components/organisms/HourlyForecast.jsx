@@ -1,19 +1,9 @@
 import { useMemo } from "react";
 import { P } from "../atoms/Text";
-import styled from "@emotion/styled";
 import { Container } from "../atoms/Container";
 import { Spacer } from "../atoms/Spacer";
 import { HourWeatherComponent } from "../molecules/HourWeatherComponent";
-
-const WeatherContainer = styled.div`
-  justify-content: center;
-  background-image: linear-gradient(to bottom right, #0084c8, #9370db);
-  border-radius: 12px;
-  padding: 8px 12px;
-  height: 110px;
-  max-width: 540px;
-  overflow-x: scroll;
-`;
+import { WeatherCard } from "../atoms/WeatherCard";
 
 export function HourlyForecast({
   data,
@@ -42,7 +32,12 @@ export function HourlyForecast({
   }, [data, sunrise, sunset, nextSunrise, nextSunset]);
 
   return (
-    <WeatherContainer>
+    <WeatherCard
+      width={540}
+      height={110}
+      overflowX="scroll"
+      justifyContent="center"
+    >
       <P size={12} textAlign="left">
         {" "}
         Hourly Forecast{" "}
@@ -60,6 +55,6 @@ export function HourlyForecast({
           </div>
         ))}
       </Container>
-    </WeatherContainer>
+    </WeatherCard>
   );
 }

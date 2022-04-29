@@ -1,18 +1,9 @@
 import { P } from "../atoms/Text";
-import styled from "@emotion/styled";
 import { Spacer } from "../atoms/Spacer";
 import { Container } from "../atoms/Container";
 import { getIcon, getUviLabel } from "../../utils/utils";
 import { HR } from "../atoms/HR";
-
-const WeatherContainer = styled.div`
-  justify-content: center;
-  background-image: linear-gradient(to bottom right, #0084c8, #9370db);
-  border-radius: 12px;
-  padding: 8px 12px;
-  width: 300px;
-  height: 190px;
-`;
+import { WeatherCard } from "../atoms/WeatherCard";
 
 interface WeatherData {
   name: string;
@@ -44,9 +35,12 @@ export function CurrentWeather({
   const uviLabel = getUviLabel(uvi);
 
   return (
-    <WeatherContainer>
+    <WeatherCard width={300} height={190} justifyContent="center">
       <Container justifyContent="space-between" row>
-        <P textAlign="left"> Today </P>
+        <P size={12} textAlign="left">
+          {" "}
+          Today{" "}
+        </P>
         <P size={20}> {name} </P>
       </Container>
       <Container row justifyContent="center" alignItems="center">
@@ -92,6 +86,6 @@ export function CurrentWeather({
           </Container>
         </Container>
       </Container>
-    </WeatherContainer>
+    </WeatherCard>
   );
 }

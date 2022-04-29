@@ -13,7 +13,7 @@ export function HourWeatherComponent({ point, sunrise, sunset, nextSunrise }) {
   const icon = getIcon(pointId, point.wind_speed, showMoon);
   const label = type || Math.round(point.temp);
   return (
-    <Container justifyContent="center" alignItems="center" key={point.dt} row>
+    <Container justifyContent="center" alignItems="center" row>
       <Container alignItems="center" justifyContent="center">
         <P size={16}> {time} </P>
         <Spacer size={6} />

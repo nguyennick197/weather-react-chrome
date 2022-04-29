@@ -49,10 +49,15 @@ export async function getAndFormatData(position) {
     const temp_max = daily[0].temp.max;
     const temp_min = daily[0].temp.min;
     const group = weather[0].main;
+    const iconId = weather[0].id;
     const description = weather[0].description;
     let name = "";
     if (locationData) {
-      name = locationData.locality || locationData.city;
+      if (locationData.locality && locationData.principalSubdivision) {
+        name = `${locationData.locality}, ${locationData.principalSubdivision}`;
+      } else {
+        name = locationData.locality || locationData.city;
+      }
     }
     const newWeatherData = {
       name,
@@ -70,6 +75,7 @@ export async function getAndFormatData(position) {
       sunrise,
       sunset,
       uvi,
+      iconId,
     };
     return newWeatherData;
   }
@@ -105,4 +111,18 @@ export function getIcon(id, wind_speed = 0, showMoon = false) {
   else if (id === 801 && showMoon) return CloudyMoon;
   else if (id === 801) return FewClouds;
   else return Clouds;
+}
+
+export function getUviLabel(uvi) {
+  if (uvi <= 2) {
+    return "(Low)";
+  } else if (uvi <= 5) {
+    return "(Moderate)";
+  } else if (uvi <= 7) {
+    return "(High)";
+  } else if (uvi <= 10) {
+    return "(Very High)";
+  } else if (uvi > 10) {
+    return "(Extreme)";
+  }
 }

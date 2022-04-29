@@ -1,5 +1,5 @@
 import { AppContainer } from "../atoms/AppContainer";
-import { WeatherCard } from "./WeatherCard";
+import { CurrentWeather } from "./CurrentWeather";
 import { Spacer } from "../atoms/Spacer";
 import { Container } from "../atoms/Container";
 import { SpinningLoader } from "../atoms/SpinningLoader";
@@ -17,7 +17,7 @@ export function WeatherApp() {
         {weatherData ? (
           <Container>
             <Container row>
-              <WeatherCard {...weatherData} />
+              <CurrentWeather {...weatherData} />
               <Spacer size={16} />
               <DailyForecast data={weatherData.daily} />
             </Container>
@@ -27,6 +27,7 @@ export function WeatherApp() {
               sunrise={weatherData.sunrise}
               sunset={weatherData.sunset}
               nextSunrise={weatherData.daily[1].sunrise}
+              nextSunset={weatherData.daily[1].sunset}
             />
           </Container>
         ) : (

@@ -9,7 +9,7 @@ const WeatherContainer = styled.div`
   border-radius: 12px;
   padding: 8px 12px;
   width: 200px;
-  max-height: 180px;
+  height: 190px;
   overflow-y: scroll;
 `;
 
@@ -20,9 +20,11 @@ export function DailyForecast({ data }) {
         {" "}
         Daily Forecast{" "}
       </P>
-      {data.slice(0, 24).map((point) => {
-        return <DayWeatherComponent point={point} />;
-      })}
+      {data.map((point, idx) => (
+        <div key={idx}>
+          <DayWeatherComponent point={point} />
+        </div>
+      ))}
       <HR color="white" opacity={0.3} />
     </WeatherContainer>
   );

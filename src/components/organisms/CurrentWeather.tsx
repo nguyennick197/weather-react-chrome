@@ -4,19 +4,7 @@ import { Container } from "../atoms/Container";
 import { getIcon, getUviLabel } from "../../utils/utils";
 import { HR } from "../atoms/HR";
 import { WeatherCard } from "../atoms/WeatherCard";
-
-interface WeatherData {
-  name: string;
-  temp: number;
-  group: string;
-  feels_like: number;
-  humidity: number;
-  temp_max: number;
-  temp_min: number;
-  wind_speed: number;
-  iconId: number;
-  uvi: number;
-}
+import { CurrentWeatherProps } from "../../utils/types";
 
 export function CurrentWeather({
   name,
@@ -29,7 +17,7 @@ export function CurrentWeather({
   iconId,
   humidity,
   uvi,
-}: WeatherData) {
+}: CurrentWeatherProps) {
   const icon = getIcon(iconId, wind_speed);
 
   const uviLabel = getUviLabel(uvi);
@@ -39,7 +27,7 @@ export function CurrentWeather({
       <Container justifyContent="space-between" row>
         <P size={12} textAlign="left">
           {" "}
-          Today{" "}
+          Today 2{" "}
         </P>
         <P size={20}> {name} </P>
       </Container>

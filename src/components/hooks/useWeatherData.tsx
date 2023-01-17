@@ -36,7 +36,10 @@ export const useWeatherData = () => {
 
   useEffect(() => {
     console.log("position", position);
-    if (chrome && chrome.storage && !weatherData) {
+    if (weatherData) {
+      return;
+    }
+    if (chrome && chrome.storage) {
       chrome.storage.local.get(["weatherData"], (data) => {
         console.log("Synced data", data);
         if (isSyncDataValid(data)) {
@@ -45,14 +48,14 @@ export const useWeatherData = () => {
           storeAndSetData(position);
         }
       });
-    } else if (!weatherData) {
-      const data = getFromLocalStorage("weatherData");
-      console.log("local data: ", data);
-      if (isSyncDataValid(data)) {
-        setWeatherData(data);
-      } else {
-        storeAndSetData(position);
-      }
+      return;
+    }
+    const data = getFromLocalStorage("weatherData");
+    console.log("local data: ", data);
+    if (isSyncDataValid(data)) {
+      setWeatherData(data);
+    } else {
+      storeAndSetData(position);
     }
   }, [position, weatherData]);
 

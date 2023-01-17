@@ -8,7 +8,7 @@ import {
   setLocalStorage,
 } from "../../utils/utils";
 
-export function useWeatherData() {
+export const useWeatherData = () => {
   const [weatherData, setWeatherData] = useState<any>();
   const position = useGeolocation();
 
@@ -52,7 +52,7 @@ export function useWeatherData() {
         storeAndSetData(position);
       }
     }
-  }, [position?.lat, position?.lon]);
+  }, [position, weatherData]);
 
   return weatherData;
-}
+};

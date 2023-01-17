@@ -4,6 +4,15 @@ import { Container } from "../atoms/Container";
 import { Spacer } from "../atoms/Spacer";
 import { HourWeatherComponent } from "../molecules/HourWeatherComponent";
 import { WeatherCard } from "../atoms/WeatherCard";
+import { HourlyPoint, SunObj } from "../../utils/types";
+
+interface HourlyForecastProps {
+  data: (HourlyPoint | SunObj)[];
+  sunrise: number;
+  sunset: number;
+  nextSunrise: number;
+  nextSunset: number;
+}
 
 export function HourlyForecast({
   data,
@@ -11,15 +20,15 @@ export function HourlyForecast({
   sunset,
   nextSunrise,
   nextSunset,
-}) {
+}: HourlyForecastProps) {
   const dataArr = useMemo(() => {
     const sunriseDt = data[0].dt > sunrise ? nextSunrise : sunrise;
     const sunsetDt = data[0].dt > sunset ? nextSunset : sunset;
-    const sunriseObject = {
+    const sunriseObject: SunObj = {
       dt: sunriseDt,
       type: "Sunrise",
     };
-    const sunsetObject = {
+    const sunsetObject: SunObj = {
       dt: sunsetDt,
       type: "Sunset",
     };

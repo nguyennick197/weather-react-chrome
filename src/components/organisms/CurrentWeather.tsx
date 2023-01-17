@@ -27,7 +27,7 @@ export function CurrentWeather({
       <Container justifyContent="space-between" row>
         <P size={12} textAlign="left">
           {" "}
-          Today 2{" "}
+          Today{" "}
         </P>
         <P size={20}> {name} </P>
       </Container>

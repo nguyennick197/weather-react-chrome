@@ -4,8 +4,13 @@ import { Spacer } from "../atoms/Spacer";
 import { format } from "date-fns";
 import { getIcon } from "../../utils/utils";
 import { HR } from "../atoms/HR";
+import { DailyPoint } from "../../utils/types";
 
-export function DayWeatherComponent({ point }) {
+interface DayWeatherProps {
+  point: DailyPoint;
+}
+
+export function DayWeatherComponent({ point }: DayWeatherProps) {
   const time = format(new Date(point.dt * 1000), "E");
   const icon = getIcon(point.weather[0].id, point.wind_speed);
 

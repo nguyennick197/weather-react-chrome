@@ -3,15 +3,22 @@ import { Container } from "../atoms/Container";
 import { Spacer } from "../atoms/Spacer";
 import { format } from "date-fns";
 import { getIcon, isNight } from "../../utils/utils";
+import { HourWeatherProps, HourlyPoint } from "../../utils/types";
 
-export function HourWeatherComponent({ point, sunrise, sunset, nextSunrise }) {
+export function HourWeatherComponent({
+  point,
+  sunrise,
+  sunset,
+  nextSunrise,
+}: HourWeatherProps) {
   const type = point.type;
   const timeFormat = type ? "h:mma" : "ha";
   const time = format(new Date(point.dt * 1000), timeFormat);
   const showMoon = isNight(point.dt, sunrise, sunset, nextSunrise);
-  const pointId = type || point.weather[0].id;
-  const icon = getIcon(pointId, point.wind_speed, showMoon);
-  const label = type || Math.round(point.temp);
+  const pointId = type || (point as HourlyPoint).weather[0].id;
+  const icon = getIcon(pointId, (point as HourlyPoint).wind_speed, showMoon);
+  const label = type || Math.round((point as HourlyPoint).temp);
+
   return (
     <Container justifyContent="center" alignItems="center" row>
       <Container alignItems="center" justifyContent="center">

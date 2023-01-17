@@ -9,15 +9,15 @@ export function useGeolocation() {
   const [userCoords, setUserCoords] = useState<Coordinate>();
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      if (!userCoords) {
+    if (!userCoords) {
+      navigator.geolocation.getCurrentPosition((position) => {
         setUserCoords({
           lat: position.coords.latitude,
           lon: position.coords.longitude,
         });
-      }
-    });
-  }, []);
+      });
+    }
+  }, [userCoords]);
 
   return userCoords;
 }

@@ -1,7 +1,7 @@
 export interface WeatherData {
   daily: DailyPoint[];
   description: string;
-  feels_like: string;
+  feels_like: number;
   group: string;
   hourly: HourlyPoint[];
   humidity: number;
@@ -12,7 +12,7 @@ export interface WeatherData {
   temp: number;
   temp_max: number;
   temp_min: number;
-  timestamp: number;
+  timestamp?: number;
   timezone: string;
   uvi: number;
   wind_speed: number;
@@ -80,15 +80,7 @@ export interface HourWeatherProps {
   nextSunrise: number;
 }
 
-export interface CurrentWeatherProps {
-  name: string;
-  temp: number;
-  group: string;
-  feels_like: number;
-  humidity: number;
-  temp_max: number;
-  temp_min: number;
-  wind_speed: number;
-  iconId: number;
-  uvi: number;
+export interface Coordinate {
+  lat: number;
+  lon: number;
 }

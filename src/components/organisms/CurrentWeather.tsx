@@ -4,7 +4,7 @@ import { Container } from "../atoms/Container";
 import { getIcon, getUviLabel } from "../../utils/utils";
 import { HR } from "../atoms/HR";
 import { WeatherCard } from "../atoms/WeatherCard";
-import { CurrentWeatherProps } from "../../utils/types";
+import { WeatherData } from "../../utils/types";
 
 export function CurrentWeather({
   name,
@@ -17,7 +17,7 @@ export function CurrentWeather({
   iconId,
   humidity,
   uvi,
-}: CurrentWeatherProps) {
+}: WeatherData) {
   const icon = getIcon(iconId, wind_speed);
 
   const uviLabel = getUviLabel(uvi);

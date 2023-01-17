@@ -7,12 +7,14 @@ import {
   getFromLocalStorage,
   setLocalStorage,
 } from "../../utils/utils";
+import { WeatherData } from "../../utils/types";
+import { Coordinate } from "../../utils/types";
 
 export const useWeatherData = () => {
-  const [weatherData, setWeatherData] = useState<any>();
+  const [weatherData, setWeatherData] = useState<WeatherData>();
   const position = useGeolocation();
 
-  async function storeAndSetData(coords: any) {
+  async function storeAndSetData(coords: Coordinate | undefined) {
     if (!coords) return;
     const data = await getAndFormatData(coords);
     const newData = {
